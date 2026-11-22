@@ -8,11 +8,13 @@ Colour palettes inspired by the jacaranda tree, whose violet blooms cover
 Australian streets every November, and the trees that flower alongside it:
 the red Illawarra flame tree, golden wattle, gum leaves and paperbark.
 
+<p align="center">
+  <img src="man/figures/gallery-palette-card-1.png" alt="The four jacarandr palettes: main, light, seq and div" width="100%">
+</p>
+
 jacarandr is deliberately small. It has four palettes, one function to get
 colours, one to look at them, and ggplot2 scales, all with the same
 `reverse` argument.
-
-![The four jacarandr palettes](man/figures/README-palettes.png)
 
 | Palette   | Type        | Use it for                                          |
 |-----------|-------------|-----------------------------------------------------|
@@ -24,6 +26,30 @@ colours, one to look at them, and ggplot2 scales, all with the same
 The `"main"` colours are ordered so that the first few are always the most
 distinct, and every pair stays distinguishable under simulated red-green and
 blue-yellow colour vision deficiency.
+
+## Gallery
+
+<table>
+  <tr>
+    <td width="50%"><img src="man/figures/gallery-bars-highlight-1.png" alt="Horizontal bar chart with one jacaranda bar highlighted against paperbark bars"></td>
+    <td width="50%"><img src="man/figures/gallery-bars-stacked-1.png" alt="Stacked proportion bar chart in jacaranda, gum leaf and flame tree"></td>
+  </tr>
+  <tr>
+    <td><img src="man/figures/gallery-lines-1.png" alt="Line chart of three economic series with direct labels"></td>
+    <td><img src="man/figures/gallery-density-1.png" alt="Overlapping density curves with light fills and main-colour outlines"></td>
+  </tr>
+  <tr>
+    <td><img src="man/figures/gallery-heatmap-1.png" alt="Old Faithful density heatmap in the sequential palette"></td>
+    <td><img src="man/figures/gallery-scatter-ordered-1.png" alt="Diamond price scatter plot coloured by ordered cut quality"></td>
+  </tr>
+  <tr>
+    <td><img src="man/figures/gallery-correlation-1.png" alt="Correlation matrix in the diverging palette, centred on zero"></td>
+    <td><img src="man/figures/gallery-base-contour-1.png" alt="Base R image of the Maunga Whau volcano in the sequential palette"></td>
+  </tr>
+</table>
+
+The code for every plot is in the
+[gallery vignette](vignettes/gallery.Rmd) (`vignette("gallery", package = "jacarandr")`).
 
 ## Installation
 
@@ -69,14 +95,14 @@ barplot(1:5, col = jac_pal(n = 5))
 image(volcano, col = jac_pal("seq", n = 50))
 ```
 
-### See colours
+### See the colours
 
 ```r
 jac_show()        # every palette
 jac_show("main")  # one palette, labelled with names and hex codes
 ```
 
-![The main palette, labelled](man/figures/README-main.png)
+![The main palette, labelled with names and hex codes](man/figures/README-main.png)
 
 ### ggplot2
 
@@ -86,25 +112,21 @@ takes `reverse`, and both British and American spellings work.
 ```r
 library(ggplot2)
 
+# Discrete
 ggplot(mpg, aes(class, fill = drv)) +
   geom_bar() +
   scale_fill_jac_d()
-```
 
-![A bar chart using the main palette](man/figures/README-bar.png)
-
-```r
+# Continuous, reversed
 ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
   geom_raster() +
   scale_fill_jac_c(reverse = TRUE)
 
-# A diverging palette centred on zero
-ggplot(df, aes(x, y, fill = z)) +
+# Diverging, with the neutral centre at zero
+ggplot(cors, aes(x, y, fill = r)) +
   geom_tile() +
-  scale_fill_jac_c(palette = "div", midpoint = 0)
+  scale_fill_jac_c(palette = "div", midpoint = 0, limits = c(-1, 1))
 ```
-
-![A diverging heatmap centred on zero](man/figures/README-div.png)
 
 A discrete palette has 8 colours. If your data has more groups, jacarandr
 stops with an error rather than reusing or inventing colours, because readers
@@ -112,7 +134,10 @@ cannot reliably tell more than about 8 categories apart. Group the smaller
 categories together, or for ordered categories use
 `scale_fill_jac_d(palette = "seq")`, which supplies any number of colours.
 
-See `vignette("jacarandr")` for more.
+## Learn more
+
+* `vignette("jacarandr")`: getting started, reversing and accessibility notes
+* `vignette("gallery")`: the plots above, with their code
 
 ## Licence
 
