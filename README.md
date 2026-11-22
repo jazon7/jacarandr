@@ -31,6 +31,9 @@ blue-yellow colour vision deficiency.
 
 <table>
   <tr>
+    <td colspan="2"><img src="man/figures/gallery-bars-grouped-1.png" alt="Grouped bar chart of eight car makes in all eight main palette colours"></td>
+  </tr>
+  <tr>
     <td width="50%"><img src="man/figures/gallery-bars-highlight-1.png" alt="Horizontal bar chart with one jacaranda bar highlighted against paperbark bars"></td>
     <td width="50%"><img src="man/figures/gallery-bars-stacked-1.png" alt="Stacked proportion bar chart in jacaranda, gum leaf and flame tree"></td>
   </tr>

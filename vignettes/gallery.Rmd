@@ -139,6 +139,40 @@ ggplot(mpg, aes(y = class, fill = drv)) +
         plot.margin = margin(5.5, 16, 5.5, 5.5))
 ```
 
+## Grouped bars
+
+With eight groups, the full `"main"` palette comes into play. Ordering the
+groups by value keeps the bars in each year easy to compare.
+
+```{r bars-grouped}
+# The eight makes with the most models, and their mean highway economy.
+makes <- names(sort(table(mpg$manufacturer), decreasing = TRUE))[1:8]
+economy <- aggregate(hwy ~ manufacturer + year,
+                     data = subset(mpg, manufacturer %in% makes),
+                     FUN = mean)
+# Order the makes from most to least efficient in 2008.
+latest <- economy[economy$year == 2008, ]
+economy$manufacturer <- factor(
+  economy$manufacturer,
+  levels = latest$manufacturer[order(latest$hwy, decreasing = TRUE)]
+)
+# Capitalise the names for display ("volkswagen" -> "Volkswagen").
+lv <- levels(economy$manufacturer)
+levels(economy$manufacturer) <- paste0(toupper(substring(lv, 1, 1)),
+                                       substring(lv, 2))
+
+ggplot(economy, aes(factor(year), hwy, fill = manufacturer)) +
+  geom_col(position = position_dodge(width = 0.85), width = 0.8) +
+  scale_fill_jac_d() +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
+  labs(title = "Volkswagen leads on the highway",
+       subtitle = "Mean highway miles per gallon of the eight biggest makes",
+       x = NULL, y = NULL, caption = "Data: ggplot2::mpg") +
+  guides(fill = guide_legend(nrow = 2, byrow = TRUE)) +
+  theme(panel.grid.major.x = element_blank(),
+        axis.text.x = element_text(size = 12, face = "bold"))
+```
+
 ## Lines with direct labels
 
 Labelling lines directly is easier to read than a legend. Here each label
