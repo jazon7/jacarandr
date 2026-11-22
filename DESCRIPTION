@@ -1,0 +1,37 @@
+Package: jacarandr
+Title: Colour Palettes Inspired by the Jacaranda Tree
+Version: 0.1.0
+Authors@R:
+    person("Jazon", email = "67318977+jazon7@users.noreply.github.com",
+           role = c("aut", "cre", "cph"))
+Description: Colour palettes inspired by the violet blooms of the
+    jacaranda tree and the Australian trees that flower alongside it in late
+    spring. Provides an eight colour discrete palette checked for
+    distinguishability under simulated colour vision deficiency, a lighter
+    companion palette, a sequential light to dark jacaranda palette and a
+    diverging jacaranda to gum leaf palette. Includes helpers to retrieve and
+    preview the colours in base R graphics, and discrete and continuous
+    scales for 'ggplot2' with a consistent way to reverse any palette.
+License: MIT + file LICENSE
+URL: https://github.com/jazon7/jacarandr
+BugReports: https://github.com/jazon7/jacarandr/issues
+Depends:
+    R (>= 4.1.0)
+Imports:
+    graphics,
+    grDevices,
+    stats
+Suggests:
+    colorspace,
+    farver,
+    ggplot2 (>= 3.5.0),
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0),
+    withr
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+Encoding: UTF-8
+Language: en-GB
+Roxygen: list(markdown = TRUE)
+Config/roxygen2/version: 8.1.1

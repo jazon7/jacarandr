@@ -1,0 +1,178 @@
+---
+title: "Getting started with jacarandr"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with jacarandr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 3.5
+)
+# ggplot2 is only suggested, so its chunks run only when it is installed.
+has_ggplot2 <- requireNamespace("ggplot2", quietly = TRUE)
+```
+
+```{r}
+library(jacarandr)
+```
+
+Each November the jacaranda trees of eastern Australia flower violet, often
+next to the scarlet Illawarra flame tree, against eucalyptus green and the
+last of the golden wattle. jacarandr turns that scene into four colour
+palettes.
+
+## The palettes
+
+```{r, fig.height = 3}
+jac_show()
+```
+
+* **`"main"`**: eight distinct colours for categories. This is the default.
+* **`"light"`**: softer versions of the same eight colours, with the same
+  names, for large areas or pairing with `"main"`.
+* **`"seq"`**: pale petal through jacaranda to deep violet, for ordered
+  values.
+* **`"div"`**: jacaranda through a near-neutral centre to gum leaf green, for
+  values on either side of a meaningful midpoint.
+
+## Getting colours
+
+`jac_pal()` returns hex codes from any palette:
+
+```{r}
+jac_pal()
+jac_pal("main", n = 4)
+jac_pal("seq", n = 6)
+```
+
+For the discrete palettes, `n` takes the *first* `n` colours. The order is
+chosen so this is always a good subset: the first three (jacaranda, gum leaf
+and flame tree) are the most distinct, and each one after adds the most
+contrast to those before it. For the continuous palettes, `n` colours are
+interpolated evenly in CIELAB space, so any `n` works.
+
+`jac_colours()` picks colours by name, which is useful for highlighting or
+for a single accent colour:
+
+```{r}
+jac_colours("jacaranda", "flame_tree")
+jac_colours("jacaranda", palette = "light")
+```
+
+`jac_pal()` returns an unnamed vector on purpose. When a *named* vector is
+given to `ggplot2::scale_fill_manual()`, the names are matched to your data
+values, so `jac_colours()` output there would leave every bar grey unless
+your data happened to contain "jacaranda".
+
+## Reversing
+
+Every function takes `reverse`:
+
+```{r, fig.height = 1.5}
+jac_show("main", n = 4, reverse = TRUE)
+```
+
+For discrete palettes, the `n` colours are chosen first and then reversed, so
+you get the same colours in the opposite order. For continuous palettes, the
+palette itself runs the other way, so `"seq"` goes from dark to light.
+
+## Base R graphics
+
+The colours are ordinary hex codes, so they work anywhere:
+
+```{r}
+barplot(c(4, 7, 3, 5), col = jac_pal(n = 4), border = NA,
+        names.arg = c("A", "B", "C", "D"))
+```
+
+```{r, fig.width = 5, fig.height = 4}
+image(volcano, col = jac_pal("seq", n = 64, reverse = TRUE), axes = FALSE)
+```
+
+## ggplot2
+
+The scales follow the common naming pattern: `scale_colour_jac_d()` and
+`scale_fill_jac_d()` for discrete data, and `scale_colour_jac_c()` and
+`scale_fill_jac_c()` for continuous data. `scale_color_*` spellings also
+work.
+
+```{r, eval = has_ggplot2}
+library(ggplot2)
+
+ggplot(mpg, aes(class, fill = drv)) +
+  geom_bar() +
+  scale_fill_jac_d() +
+  theme_minimal()
+```
+
+```{r, eval = has_ggplot2}
+ggplot(mpg, aes(displ, hwy, colour = drv)) +
+  geom_point(size = 2) +
+  scale_colour_jac_d(reverse = TRUE) +
+  theme_minimal()
+```
+
+The light palette works well for filled shapes with main-coloured outlines:
+
+```{r, eval = has_ggplot2}
+ggplot(mpg, aes(displ, hwy, fill = drv, colour = drv)) +
+  geom_point(shape = 21, size = 3, stroke = 0.8) +
+  scale_fill_jac_d(palette = "light") +
+  scale_colour_jac_d() +
+  theme_minimal()
+```
+
+For continuous data:
+
+```{r, eval = has_ggplot2}
+ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
+  geom_raster() +
+  scale_fill_jac_c() +
+  theme_minimal()
+```
+
+For diverging data, set `midpoint` so the neutral centre colour sits at the
+value that matters, usually zero. Without it, the centre colour would fall at
+the middle of the data range, which may not be zero at all.
+
+```{r, eval = has_ggplot2, fig.width = 5, fig.height = 4}
+df <- expand.grid(x = 1:30, y = 1:30)
+df$z <- with(df, sin(x / 4) * cos(y / 5) + 0.3)
+
+ggplot(df, aes(x, y, fill = z)) +
+  geom_tile() +
+  scale_fill_jac_c(palette = "div", midpoint = 0) +
+  coord_equal() +
+  theme_void()
+```
+
+### More than eight groups
+
+A discrete palette has 8 colours. With more groups, jacarandr stops with an
+error rather than reusing colours (two groups that look identical) or
+interpolating new ones (several groups that look nearly identical). Either
+group the smaller categories together, or, if the categories have a natural
+order, use a continuous palette in the discrete scale:
+
+```{r, eval = has_ggplot2}
+ggplot(diamonds, aes(clarity, fill = clarity)) +
+  geom_bar() +
+  scale_fill_jac_d(palette = "seq") +
+  theme_minimal()
+```
+
+## Accessibility
+
+Lightness was varied deliberately across the `"main"` colours. For example,
+the gum leaf green is much darker than the flame tree red, which keeps them
+apart for readers with red-green colour vision deficiency. Every pair of
+`"main"` colours is at least 10 CIEDE2000 units apart under simulated
+deuteranopia, protanopia and tritanopia, and the package's test suite checks
+this. Colour still should not be the only way information is shown: label
+lines directly or use shapes too where you can.
