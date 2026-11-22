@@ -41,8 +41,8 @@ system. It returns a plain character vector of hex codes.
 \section{Palettes}{
 
 \itemize{
-\item \code{"main"} (discrete, 8 colours): jacaranda, gum leaf, flame tree,
-wattle, blue gum, red cedar, paperbark and twilight. The colours are
+\item \code{"main"} (discrete, 8 colours): jacaranda, fig leaf, flame tree,
+wattle, blue gum, lilly pilly, blue quandong and twilight. The colours are
 ordered so that the first \code{n} are always a good choice: the first three
 are the most distinct, and every pair stays distinguishable under
 simulated red-green and blue-yellow colour vision deficiency.
@@ -52,7 +52,7 @@ names and order, for large filled areas, backgrounds or pairing with
 \item \code{"seq"} (sequential): pale petal through jacaranda to deep violet, for
 ordered or continuous data.
 \item \code{"div"} (diverging): jacaranda violet through a near-neutral centre to
-gum leaf green, for data with a meaningful midpoint such as zero.
+fig leaf green, for data with a meaningful midpoint such as zero.
 }
 
 Use \code{\link[=jac_show]{jac_show()}} to see them.

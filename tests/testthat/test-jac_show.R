@@ -26,6 +26,15 @@ test_that("every palette can be shown, with and without labels", {
   expect_no_error(jac_show("seq", n = 40))
 })
 
+test_that("labels shrink to fit on a small device", {
+  # A 3 x 2 inch device leaves swatches too narrow for the default text size,
+  # so the labels must be scaled down rather than overflow or error.
+  grDevices::pdf(NULL, width = 3, height = 2)
+  withr::defer(grDevices::dev.off())
+  expect_no_error(jac_show("main"))
+  expect_no_error(jac_show("light", n = 3))
+})
+
 test_that("jac_show() restores the graphics parameters it changes", {
   local_null_device()
   before <- graphics::par("mar")

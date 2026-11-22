@@ -20,7 +20,7 @@
       jac_colours("jacaranda", "purple", "green")
     Condition
       Error:
-      ! Unknown colour names: "purple", "green". Available names are: "jacaranda", "gum_leaf", "flame_tree", "wattle", "blue_gum", "red_cedar", "paperbark", "twilight".
+      ! Unknown colour names: "purple", "green". Available names are: "jacaranda", "fig_leaf", "flame_tree", "wattle", "blue_gum", "lilly_pilly", "blue_quandong", "twilight".
 
 # jac_colours() only accepts discrete palettes
 

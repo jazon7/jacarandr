@@ -67,12 +67,16 @@ jac_show <- function(palette = NULL, n = NULL, reverse = FALSE,
 
   if (labels && k <= 16L) {
     ink <- label_ink(colours)
-    cex <- if (k > 8L) 0.6 else 0.8
     x <- seq_len(k) - 0.5
+    label_names <- if (!is.null(swatch_names)) gsub("_", " ", swatch_names)
+    # Shrink the text if needed so the widest label fits inside its swatch
+    # (one user unit wide) on any device size, keeping a small margin.
+    widest <- max(graphics::strwidth(c(colours, label_names), cex = 1,
+                                     font = 2))
+    cex <- min(if (k > 8L) 0.6 else 0.8, 0.9 / widest)
     graphics::text(x, 0.45, colours, col = ink, cex = cex)
-    if (!is.null(swatch_names)) {
-      graphics::text(x, 0.58, gsub("_", " ", swatch_names), col = ink,
-                     cex = cex, font = 2)
+    if (!is.null(label_names)) {
+      graphics::text(x, 0.58, label_names, col = ink, cex = cex, font = 2)
     }
   }
 

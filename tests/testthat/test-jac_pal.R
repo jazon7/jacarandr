@@ -128,10 +128,10 @@ test_that("jac_colours() looks up colours by name, in the order given", {
   out <- jac_colours("flame_tree", "jacaranda")
   expect_identical(
     out,
-    c(flame_tree = "#E5603F", jacaranda = "#8E73C9")
+    c(flame_tree = "#F28249", jacaranda = "#8E73C9")
   )
   # Repeats are allowed, which is useful for highlighting.
-  expect_length(jac_colours("paperbark", "jacaranda", "paperbark"), 3)
+  expect_length(jac_colours("blue_gum", "jacaranda", "blue_gum"), 3)
   # A character vector works as well as separate arguments.
   expect_identical(jac_colours(c("flame_tree", "jacaranda")), out)
 })

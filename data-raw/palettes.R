@@ -25,25 +25,32 @@ min_delta_e <- function(cols) {
 }
 
 # Main discrete palette ------------------------------------------------------
-# Hand-picked, then tuned until every pair is at least 10 apart under all
-# three simulations. Red and green were given very different lightness
-# (L* 57 vs 36) because equal lightness makes them merge under deuteranopia.
+# Hand-picked, then tuned by grid search until every pair is at least 10
+# apart under all three simulations. The constraints that bind:
+# * Green vs orange under protanopia. Red-blind readers see red and orange
+#   as darker, so the fig leaf green (L* 47) must stay clearly darker than the
+#   flame tree orange (L* 66). A lighter green fails this check.
+# * Pink vs deep blue under protanopia, where lilly pilly looks bluish. Blue
+#   quandong is kept darker (L* 38) than lilly pilly (L* 52).
+# * Wattle vs flame tree under deuteranopia, which is why wattle is a slightly
+#   lighter, yellower gold than a pure wattle colour.
 main <- c(
-  jacaranda = "#8E73C9", gum_leaf = "#2F5E3D", flame_tree = "#E5603F",
-  wattle = "#EFC23A", blue_gum = "#9CC0CF", red_cedar = "#A3521B",
-  paperbark = "#D9C7A7", twilight = "#352862"
+  jacaranda = "#8E73C9", fig_leaf = "#3A7E2F", flame_tree = "#F28249",
+  wattle = "#F2C83A", blue_gum = "#9CC0CF", lilly_pilly = "#C85382",
+  blue_quandong = "#42598B", twilight = "#352862"
 )
 round(min_delta_e(main), 1)
 for (k in 3:8) print(round(min_delta_e(main[seq_len(k)]), 1))
 
 # Light companion ------------------------------------------------------------
-# Mix 45% towards white in CIELAB. A uniform-lightness pastel set
-# collapses under CVD, so mixing keeps the lightness ordering of "main".
+# Mix each colour towards white in CIELAB. Mixing all eight by the same amount
+# flattens their lightness differences and they collapse under CVD, so each
+# gets its own amount, found by random search to maximise the minimum
+# distance (rounded here so the result is reproducible).
+mix <- c(0.45, 0.27, 0.42, 0.27, 0.47, 0.33, 0.31, 0.34)
 lab <- convert_colour(decode_colour(main), "rgb", "lab")
-lab <- lab * 0.55 + matrix(c(100, 0, 0), nrow(lab), 3, byrow = TRUE) * 0.45
+lab <- lab * (1 - mix) + outer(mix, c(100, 0, 0))
 light <- setNames(encode_colour(convert_colour(lab, "lab", "rgb")), names(main))
-# The mixed red cedar sat too close to flame tree; nudged darker and browner.
-light[["red_cedar"]] <- "#C4906F"
 light
 round(min_delta_e(light), 1)
 
@@ -61,10 +68,11 @@ seq_pal
 
 # Diverging ------------------------------------------------------------------
 # Lightness mirrored around a near-neutral centre (L* 95), jacaranda hue
-# on the low side and gum leaf hue (about 137 degrees) on the high side.
+# on the low side and the fig leaf hue on the high side.
+fig_hue <- coords(as(hex2RGB(main[["fig_leaf"]]), "polarLUV"))[, "H"]
 div_pal <- hcl_hex(
   l = c(28, 50, 73, 95, 73, 50, 28),
-  c = c(50, 48, 28, 2, 22, 36, 34),
-  h = c(274, 276, 277, 90, 137, 137, 137)
+  c = c(50, 48, 28, 2, 24, 40, 40),
+  h = c(274, 276, 277, 90, fig_hue, fig_hue, fig_hue)
 )
 div_pal

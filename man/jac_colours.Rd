@@ -25,9 +25,9 @@ highlighting, annotation, or setting a single colour such as
 \code{geom_line(colour = jac_colours("jacaranda"))}.
 }
 \details{
-The names are \code{jacaranda}, \code{gum_leaf}, \code{flame_tree}, \code{wattle}, \code{blue_gum},
-\code{red_cedar}, \code{paperbark} and \code{twilight}, and both discrete palettes use
-them.
+The names are \code{jacaranda}, \code{fig_leaf}, \code{flame_tree}, \code{wattle}, \code{blue_gum},
+\code{lilly_pilly}, \code{blue_quandong} and \code{twilight}, and both discrete palettes
+use them.
 }
 \examples{
 jac_colours()
@@ -35,7 +35,7 @@ jac_colours("jacaranda", "flame_tree")
 jac_colours("jacaranda", palette = "light")
 
 # Highlight one bar in base graphics
-barplot(c(3, 5, 2), col = jac_colours("paperbark", "jacaranda", "paperbark"))
+barplot(c(3, 5, 2), col = jac_colours("blue_gum", "jacaranda", "blue_gum"))
 }
 \seealso{
 \code{\link[=jac_pal]{jac_pal()}} for an unnamed vector of \code{n} colours.

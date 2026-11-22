@@ -6,7 +6,8 @@
 
 Colour palettes inspired by the jacaranda tree, whose violet blooms cover
 Australian streets every November, and the trees that flower alongside it:
-the red Illawarra flame tree, golden wattle, gum leaves and paperbark.
+the orange-red Illawarra flame tree, golden wattle, glossy figs, lilly pilly
+and blue quandong.
 
 <p align="center">
   <img src="man/figures/gallery-palette-card-1.png" alt="The four jacarandr palettes: main, light, seq and div" width="100%">
@@ -34,8 +35,8 @@ blue-yellow colour vision deficiency.
     <td colspan="2"><img src="man/figures/gallery-bars-grouped-1.png" alt="Grouped bar chart of eight car makes in all eight main palette colours"></td>
   </tr>
   <tr>
-    <td width="50%"><img src="man/figures/gallery-bars-highlight-1.png" alt="Horizontal bar chart with one jacaranda bar highlighted against paperbark bars"></td>
-    <td width="50%"><img src="man/figures/gallery-bars-stacked-1.png" alt="Stacked proportion bar chart in jacaranda, gum leaf and flame tree"></td>
+    <td width="50%"><img src="man/figures/gallery-bars-highlight-1.png" alt="Horizontal bar chart with one jacaranda bar highlighted against light jacaranda bars"></td>
+    <td width="50%"><img src="man/figures/gallery-bars-stacked-1.png" alt="Stacked proportion bar chart in jacaranda, fig leaf and flame tree"></td>
   </tr>
   <tr>
     <td><img src="man/figures/gallery-lines-1.png" alt="Line chart of three economic series with direct labels"></td>
@@ -74,21 +75,21 @@ jacarandr only needs base R. ggplot2 is optional and only needed for the
 library(jacarandr)
 
 jac_pal()                      # all 8 main colours
-#> [1] "#8E73C9" "#2F5E3D" "#E5603F" "#EFC23A" "#9CC0CF" "#A3521B" "#D9C7A7"
+#> [1] "#8E73C9" "#3A7E2F" "#F28249" "#F2C83A" "#9CC0CF" "#C85382" "#42598B"
 #> [8] "#352862"
 
 jac_pal(n = 3)                 # the three most distinct
-#> [1] "#8E73C9" "#2F5E3D" "#E5603F"
+#> [1] "#8E73C9" "#3A7E2F" "#F28249"
 
 jac_pal(n = 3, reverse = TRUE) # the same three, reversed
-#> [1] "#E5603F" "#2F5E3D" "#8E73C9"
+#> [1] "#F28249" "#3A7E2F" "#8E73C9"
 
 jac_pal("seq", n = 5)          # any number from a continuous palette
-#> [1] "#F7F1FF" "#B79FE6" "#8E73C9" "#433771" "#282051"
+#> [1] "#F7F1FF" "#C9B5ED" "#8E73C9" "#544585" "#282051"
 
 jac_colours("jacaranda", "wattle")  # pick colours by name
 #> jacaranda    wattle
-#> "#8E73C9" "#EFC23A"
+#> "#8E73C9" "#F2C83A"
 ```
 
 They work anywhere a colour vector does, including base graphics:

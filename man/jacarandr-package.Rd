@@ -6,7 +6,7 @@
 \alias{jacarandr-package}
 \title{jacarandr: Colour Palettes Inspired by the Jacaranda Tree}
 \description{
-Colour palettes inspired by the violet blooms of the jacaranda tree and the Australian trees that flower alongside it in late spring. Provides an eight colour discrete palette checked for distinguishability under simulated colour vision deficiency, a lighter companion palette, a sequential light to dark jacaranda palette and a diverging jacaranda to gum leaf palette. Includes helpers to retrieve and preview the colours in base R graphics, and discrete and continuous scales for 'ggplot2' with a consistent way to reverse any palette.
+Colour palettes inspired by the violet blooms of the jacaranda tree and the Australian trees that flower alongside it in late spring. Provides an eight colour discrete palette checked for distinguishability under simulated colour vision deficiency, a lighter companion palette, a sequential light to dark jacaranda palette and a diverging jacaranda to fig leaf palette. Includes helpers to retrieve and preview the colours in base R graphics, and discrete and continuous scales for 'ggplot2' with a consistent way to reverse any palette.
 }
 \section{Getting started}{
 

@@ -8,47 +8,49 @@
 # `data-raw/palettes.R`):
 #
 # * "main" is ordered so that any prefix is a good palette on its own: the
-#   first three colours (jacaranda, gum leaf, flame tree) are the most
-#   distinct, and each colour after that is the one that adds the most
-#   contrast. Lightness was deliberately varied between hues (for example the
-#   gum leaf green is much darker than the flame tree red) so the colours stay
-#   distinguishable for readers with red-green colour vision deficiency. The
-#   CIEDE2000 distance between every pair is at least 10 under simulated
-#   deuteranopia, protanopia and tritanopia; a test guards this.
-# * "light" mixes each "main" colour about halfway towards white in CIELAB,
-#   with one hand-tuned value (red cedar) so its pairs stay apart. It keeps the
-#   same names and order as "main" so the two can be paired.
+#   first three colours (jacaranda, fig leaf, flame tree) are the most
+#   distinct, and later colours add contrast to those before them. Lightness
+#   was deliberately varied between hues (for example the fig leaf green,
+#   L* 47, is darker than the orange flame tree, L* 66) so the colours stay
+#   distinguishable for readers with red-green colour vision deficiency, who
+#   tell red and green apart mainly by lightness. The CIEDE2000 distance
+#   between every pair is at least 10 under simulated deuteranopia,
+#   protanopia and tritanopia; a test guards this.
+# * "light" mixes each "main" colour towards white in CIELAB. The amount
+#   differs per colour (27% to 47%), because an equal mix flattens the
+#   lightness differences that keep the colours apart. It keeps the same names
+#   and order as "main" so the two can be paired.
 # * "seq" is built in HCL space around the jacaranda hue with strictly
 #   decreasing lightness. Its middle anchor is exactly the "main" jacaranda.
 # * "div" mirrors lightness either side of a near-neutral centre: jacaranda
-#   violet on the low side and gum leaf green on the high side.
+#   violet on the low side and fig leaf green on the high side.
 
 #' @noRd
 jac_palettes <- list(
   main = list(
     type = "discrete",
     colours = c(
-      jacaranda  = "#8E73C9", # jacaranda bloom, the core colour
-      gum_leaf   = "#2F5E3D", # eucalyptus canopy
-      flame_tree = "#E5603F", # Illawarra flame tree flowers
-      wattle     = "#EFC23A", # golden wattle blossom
-      blue_gum   = "#9CC0CF", # juvenile blue gum leaves
-      red_cedar  = "#A3521B", # Australian red cedar timber
-      paperbark  = "#D9C7A7", # paperbark (Melaleuca) bark
-      twilight   = "#352862"  # jacaranda at dusk
+      jacaranda     = "#8E73C9", # jacaranda bloom, the core colour
+      fig_leaf      = "#3A7E2F", # glossy Moreton Bay fig leaves
+      flame_tree    = "#F28249", # Illawarra flame tree flowers
+      wattle        = "#F2C83A", # golden wattle blossom
+      blue_gum      = "#9CC0CF", # juvenile blue gum leaves
+      lilly_pilly   = "#C85382", # lilly pilly berries
+      blue_quandong = "#42598B", # blue quandong fruit
+      twilight      = "#352862"  # jacaranda at dusk
     )
   ),
   light = list(
     type = "discrete",
     colours = c(
-      jacaranda  = "#C2B0E2",
-      gum_leaf   = "#89A48F",
-      flame_tree = "#FBA992",
-      wattle     = "#FDDD97",
-      blue_gum   = "#C9DCE4",
-      red_cedar  = "#C4906F",
-      paperbark  = "#EBE0CE",
-      twilight   = "#8D81A6"
+      jacaranda     = "#C2B0E2",
+      fig_leaf      = "#71A065",
+      flame_tree    = "#FFB793",
+      wattle        = "#FAD675",
+      blue_gum      = "#CBDDE5",
+      lilly_pilly   = "#DE8EA9",
+      blue_quandong = "#7D89AE",
+      twilight      = "#786A95"
     )
   ),
   seq = list(
@@ -61,8 +63,8 @@ jac_palettes <- list(
   div = list(
     type = "diverging",
     colours = c(
-      "#4A357C", "#7F6DAA", "#B8AED2", "#F1F1EE", "#9BBBA3", "#4B835B",
-      "#024D23"
+      "#4A357C", "#7F6DAA", "#B8AED2", "#F1F1EE", "#9FBB9D", "#54824E",
+      "#144D05"
     )
   )
 )

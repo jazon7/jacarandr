@@ -4,8 +4,8 @@
 #' system. It returns a plain character vector of hex codes.
 #'
 #' @section Palettes:
-#' * `"main"` (discrete, 8 colours): jacaranda, gum leaf, flame tree,
-#'   wattle, blue gum, red cedar, paperbark and twilight. The colours are
+#' * `"main"` (discrete, 8 colours): jacaranda, fig leaf, flame tree,
+#'   wattle, blue gum, lilly pilly, blue quandong and twilight. The colours are
 #'   ordered so that the first `n` are always a good choice: the first three
 #'   are the most distinct, and every pair stays distinguishable under
 #'   simulated red-green and blue-yellow colour vision deficiency.
@@ -15,7 +15,7 @@
 #' * `"seq"` (sequential): pale petal through jacaranda to deep violet, for
 #'   ordered or continuous data.
 #' * `"div"` (diverging): jacaranda violet through a near-neutral centre to
-#'   gum leaf green, for data with a meaningful midpoint such as zero.
+#'   fig leaf green, for data with a meaningful midpoint such as zero.
 #'
 #' Use [jac_show()] to see them.
 #'
@@ -99,9 +99,9 @@ jac_pal <- function(palette = "main", n = NULL, reverse = FALSE) {
 #' highlighting, annotation, or setting a single colour such as
 #' `geom_line(colour = jac_colours("jacaranda"))`.
 #'
-#' The names are `jacaranda`, `gum_leaf`, `flame_tree`, `wattle`, `blue_gum`,
-#' `red_cedar`, `paperbark` and `twilight`, and both discrete palettes use
-#' them.
+#' The names are `jacaranda`, `fig_leaf`, `flame_tree`, `wattle`, `blue_gum`,
+#' `lilly_pilly`, `blue_quandong` and `twilight`, and both discrete palettes
+#' use them.
 #'
 #' @param ... Colour names as character strings. If none are given, every
 #'   colour in the palette is returned.
@@ -118,7 +118,7 @@ jac_pal <- function(palette = "main", n = NULL, reverse = FALSE) {
 #' jac_colours("jacaranda", palette = "light")
 #'
 #' # Highlight one bar in base graphics
-#' barplot(c(3, 5, 2), col = jac_colours("paperbark", "jacaranda", "paperbark"))
+#' barplot(c(3, 5, 2), col = jac_colours("blue_gum", "jacaranda", "blue_gum"))
 jac_colours <- function(..., palette = "main") {
   pal <- check_palette(
     palette,

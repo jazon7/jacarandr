@@ -28,8 +28,8 @@ test_that("the expected palettes exist, with the expected types", {
 })
 
 test_that("discrete palettes have 8 colours with matching names and order", {
-  expected <- c("jacaranda", "gum_leaf", "flame_tree", "wattle", "blue_gum",
-                "red_cedar", "paperbark", "twilight")
+  expected <- c("jacaranda", "fig_leaf", "flame_tree", "wattle", "blue_gum",
+                "lilly_pilly", "blue_quandong", "twilight")
   expect_named(jac_palettes$main$colours, expected)
   expect_named(jac_palettes$light$colours, expected)
 })

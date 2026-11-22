@@ -23,9 +23,9 @@ library(jacarandr)
 ```
 
 Each November the jacaranda trees of eastern Australia flower violet, often
-next to the scarlet Illawarra flame tree, against eucalyptus green and the
-last of the golden wattle. jacarandr turns that scene into four colour
-palettes.
+next to the orange-red Illawarra flame tree, glossy green figs, lilly pilly
+and the last of the golden wattle. jacarandr turns that scene into four
+colour palettes.
 
 ## The palettes
 
@@ -38,7 +38,7 @@ jac_show()
   names, for large areas or pairing with `"main"`.
 * **`"seq"`**: pale petal through jacaranda to deep violet, for ordered
   values.
-* **`"div"`**: jacaranda through a near-neutral centre to gum leaf green, for
+* **`"div"`**: jacaranda through a near-neutral centre to fig leaf green, for
   values on either side of a meaningful midpoint.
 
 ## Getting colours
@@ -52,7 +52,7 @@ jac_pal("seq", n = 6)
 ```
 
 For the discrete palettes, `n` takes the *first* `n` colours. The order is
-chosen so this is always a good subset: the first three (jacaranda, gum leaf
+chosen so this is always a good subset: the first three (jacaranda, fig leaf
 and flame tree) are the most distinct, and each one after adds the most
 contrast to those before it. For the continuous palettes, `n` colours are
 interpolated evenly in CIELAB space, so any `n` works.
@@ -170,8 +170,8 @@ ggplot(diamonds, aes(clarity, fill = clarity)) +
 ## Accessibility
 
 Lightness was varied deliberately across the `"main"` colours. For example,
-the gum leaf green is much darker than the flame tree red, which keeps them
-apart for readers with red-green colour vision deficiency. Every pair of
+the fig leaf green is clearly darker than the flame tree orange, which keeps
+them apart for readers with red-green colour vision deficiency. Every pair of
 `"main"` colours is at least 10 CIEDE2000 units apart under simulated
 deuteranopia, protanopia and tritanopia, and the package's test suite checks
 this. Colour still should not be the only way information is shown: label

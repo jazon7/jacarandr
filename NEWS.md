@@ -3,7 +3,7 @@
 * Initial release.
 * Four palettes: `"main"` (8 discrete colours), `"light"` (a softer companion
   to `"main"`), `"seq"` (sequential light to dark jacaranda) and `"div"`
-  (diverging jacaranda to gum leaf).
+  (diverging jacaranda to fig leaf).
 * `jac_pal()` returns colours from any palette, with `n` and `reverse`.
 * `jac_colours()` returns colours by name.
 * `jac_show()` previews palettes with base graphics.
